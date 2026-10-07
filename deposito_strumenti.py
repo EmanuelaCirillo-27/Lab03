@@ -32,7 +32,8 @@ class DepositoStrumenti:
                     anno_acquisto = row[3]
                     valore = row[4]
                     nuovi_strumenti=([codice, tipo, marca, anno_acquisto, valore])
-                    self.__strumenti.append(nuovi_strumenti)
+
+                self.__strumenti.append(nuovi_strumenti)
 
 
         except FileNotFoundError:
