@@ -16,6 +16,9 @@ class DepositoStrumenti:
     def responsabile(self, new_responsabile):
         self.__responsabile=new_responsabile
 
+    def __str__(self):
+        return f' {self.__responsabile}'
+
 
     def carica_file_strumenti(self, file_path):
         """Carica gli strumenti dal file"""

@@ -21,6 +21,7 @@ def main():
         if scelta == "1":
             nuovo_responsabile = input("Inserisci il nuovo responsabile: ")
             deposito.responsabile=nuovo_responsabile
+            print(f'Il nuovo responsabile è: {deposito.responsabile}')
 
         elif scelta == "2":
             while True:
