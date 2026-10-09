@@ -1,4 +1,5 @@
 import csv
+from strumento import Strumento
 
 class DepositoStrumenti:
     def __init__(self, nome, responsabile):
@@ -6,7 +7,7 @@ class DepositoStrumenti:
         self._nome=nome
         self.__responsabile=responsabile
 
-        self.__strumenti=[]
+        self.strumenti=[]
 
     @property
     def responsabile(self):
@@ -25,26 +26,26 @@ class DepositoStrumenti:
         try:
 
             with open(file_path, 'r', encoding='utf8') as f:
-                f.readline()
                 reader = csv.reader(f)
+
 
                 for row in reader:
                     codice = row[0]
                     tipo = row[1]
                     marca = row[2]
-                    anno_acquisto = row[3]
-                    valore = row[4]
-                    nuovi_strumenti=([codice, tipo, marca, anno_acquisto, valore])
+                    anno_acquisto = int(row[3])
+                    valore = float(row[4])
+                    strumento=Strumento(codice, tipo, marca, anno_acquisto, valore)
+                    self.strumenti.append(strumento)
 
-                self.__strumenti.append(nuovi_strumenti)
-
+            return self.strumenti
 
         except FileNotFoundError:
             return 'File non trovato'
 
     def aggiungi_strumento(self, tipo, marca, anno_acquisto, valore):
         """Aggiunge uno strumento nel deposito: aggiunge solo nel sistema e non aggiorna il file"""
-        # TODO
+
 
     def strumenti_ordinati_per_marca(self):
         """Ordina gli strumenti per marca in ordine alfabetico"""

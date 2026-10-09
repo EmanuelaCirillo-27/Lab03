@@ -27,7 +27,10 @@ def main():
             while True:
                 try:
                     file_path = input("Inserisci il path del file da caricare: ").strip()
-                    deposito.carica_file_strumenti(file_path)
+                    stru=deposito.carica_file_strumenti(file_path)
+                    print('Caricati con successo!')
+                    for s in stru:
+                        print(s)
                     break
                 except Exception as e:
                     print(e)
