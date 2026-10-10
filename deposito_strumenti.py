@@ -1,5 +1,6 @@
 import csv
 from strumento import Strumento
+from operator import attrgetter
 
 class DepositoStrumenti:
     def __init__(self, nome, responsabile):
@@ -43,13 +44,37 @@ class DepositoStrumenti:
         except FileNotFoundError:
             return 'File non trovato'
 
+
+    def crea_codice(self, strumenti):
+
+        codici=[]
+
+        for row in strumenti:
+            codici.append(row.codice)
+
+        ultimo=codici[-1]
+        ultimo_num=ultimo[1:]
+
+        nuovo_num=int(ultimo_num)+1
+        nuovo_codice='S'+str(nuovo_num)
+
+        return nuovo_codice
+
+
+
     def aggiungi_strumento(self, tipo, marca, anno_acquisto, valore):
         """Aggiunge uno strumento nel deposito: aggiunge solo nel sistema e non aggiorna il file"""
+        codice=self.crea_codice(self.strumenti)
 
+        nuovo_strumento=Strumento(codice, tipo, marca, anno_acquisto, valore)
+        self.strumenti.append(nuovo_strumento)
+
+        return nuovo_strumento
 
     def strumenti_ordinati_per_marca(self):
         """Ordina gli strumenti per marca in ordine alfabetico"""
-        # TODO
+        return sorted(self.strumenti, key=attrgetter('marca'))
+
 
     def nuovo_prestito(self, data, id_strumento, cognome_allievo):
         """Crea un nuovo prestito"""
